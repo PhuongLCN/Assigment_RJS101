@@ -4,7 +4,6 @@ import './App.css';
 import Stafflist from "./component/Stafflist";
 import { STAFFS } from "./shared/staffs";
 
-
 class App extends Component {
   constructor(props) {
     super(props);
