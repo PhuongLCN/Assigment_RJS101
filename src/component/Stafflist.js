@@ -12,7 +12,7 @@ class Stafflist extends Component {
 
     this.state = {
       selectedStaff: null,
-      class_div: "col-12 col-md-3 m-1"
+      class_div: "col-12 col-md-4"
     }
   }
 
@@ -21,8 +21,8 @@ class Stafflist extends Component {
   }
 
   onColumnChange(columnNum) {
-    var temp = 11 / columnNum;
-    var changecol = "col-12 col-md-" + temp + " m-1";
+    var temp = 12 / columnNum;
+    var changecol = "col-12 col-md-" + temp;
     this.setState({ class_div: changecol });
   }
 
@@ -68,22 +68,28 @@ class Stafflist extends Component {
 
     return (
       <div className="container">
-        <div className="row">          
-            <h6 style={{ textAlign:"right" }, { margin: "25px" }}>Số cột hiển thị</h6>          
-          <div className="col-12 col-md-4">
-            <div style={{ marginTop: "20px" }}>
+        <div className="row">
+          <h6 style={{ textAlign: "left" }, { margin: "25px" }}>Số cột hiển thị:</h6>
+        </div>
+        <div className="row">
+          
+            <div style={{ marginTop: "0px" }, { marginLeft: "25px" }}>
               <Button
+                onClick={()=> this.onColumnChange(1)}
                 color="primary"
                 outline
               >
                 1
               </Button>
               {' '}
-              <Button outline>
+              <Button 
+              onClick={()=> this.onColumnChange(2)}
+              outline>
                 2
               </Button>
               {' '}
               <Button
+              onClick={()=> this.onColumnChange(3)}
                 color="success"
                 outline
               >
@@ -91,13 +97,22 @@ class Stafflist extends Component {
               </Button>
               {' '}
               <Button
+              onClick={()=> this.onColumnChange(4)}
                 color="info"
                 outline
               >
                 4
               </Button>
+              {' '}
+              <Button
+              onClick={()=> this.onColumnChange(6)}
+                color="info"
+                outline
+              >
+                6
+              </Button>
             </div>
-          </div>
+          
         </div>
         <div className="row">
           {list}
