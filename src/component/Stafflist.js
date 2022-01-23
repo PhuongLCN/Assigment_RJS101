@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, Button } from 'reactstrap';
 import dateFormat from 'dateformat';
 
 
@@ -20,14 +20,18 @@ class Stafflist extends Component {
   renderStaff(staff) {
     if (staff != null)
       return (
-        <Card>
+        <Card
+        color="warning"
+        outline>
           <CardBody style={{ textAlign: "left" }}>
-            <CardTitle>Họ và tên: {staff.name}</CardTitle>
-            <CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText>
-            <CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText>
-            <CardText>Phòng ban {staff.department.id}</CardText>
-            <CardText>Số ngày nghỉ {staff.annualLeave}</CardText>
-            <CardText>Số ngày đi làm thêm {staff.overTime}</CardText>
+          <CardTitle tag="h5">Họ và tên: {staff.name}</CardTitle>
+            <ul>              
+              <li><CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText></li>
+              <li><CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText></li>
+              <li><CardText>Phòng ban: {staff.department.id}</CardText></li>
+              <li><CardText>Số ngày nghỉ: {staff.annualLeave}</CardText></li>
+              <li><CardText>Số ngày đi làm thêm: {staff.overTime}</CardText></li>
+            </ul>
           </CardBody>
         </Card>
       );
@@ -41,9 +45,13 @@ class Stafflist extends Component {
     const list = this.props.staffs.map((staff) => {
       return (
         <div className="col-12 col-md-5 m-1">
-          <Card key={staff.id}
-            onClick={() => this.onStaffSelect(staff)}>
-            <CardTitle>{staff.name}</CardTitle>
+          <Card
+            body
+            color="warning"
+            outline>
+            <CardTitle tag="h5">{staff.name}</CardTitle>
+            <Button key={staff.id}
+              onClick={() => this.onStaffSelect(staff)}>Xem thông tin</Button>
           </Card>
         </div>
       );
