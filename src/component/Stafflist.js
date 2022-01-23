@@ -9,12 +9,19 @@ class Stafflist extends Component {
     super(props);
 
     this.state = {
-      selectedStaff: null
+      selectedStaff: null,
+      class_div: "col-12 col-md-5 m-1"
     }
   }
 
   onStaffSelect(staff) {
     this.setState({ selectedStaff: staff });
+  }
+
+  onColumnSelect(columnNum) {
+    var temp = 11/columnNum;
+    var changecol = "col-12 col-md-" + temp +" m-1";
+    this.setState({class_div: changecol});
   }
 
   renderStaff(staff) {
@@ -44,7 +51,7 @@ class Stafflist extends Component {
   render() {
     const list = this.props.staffs.map((staff) => {
       return (
-        <div className="col-12 col-md-5 m-1">
+        <div className={this.state.class_div}>
           <Card
             body
             color="warning"
@@ -61,11 +68,12 @@ class Stafflist extends Component {
       <div className="container">
         <div className="row">
           {list}
-          <div className="col-12 col-md-5 m-1">
+          <div className="col-12 col-md-12">
             {this.renderStaff(this.state.selectedStaff)}
           </div>
         </div>
       </div>
+      
     );
   }
 }
