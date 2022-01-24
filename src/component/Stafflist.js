@@ -54,7 +54,8 @@ class Stafflist extends Component {
     const list = this.props.staffs.map((staff) => {
       return (
         <div className={this.state.class_div}>
-          <Card
+          <Card  
+            style={{ marginTop: "10px" }}                    
             body
             color="warning"
             outline>
@@ -106,7 +107,7 @@ class Stafflist extends Component {
               {' '}
               <Button
               onClick={()=> this.onColumnChange(6)}
-                color="info"
+                color="warning"
                 outline
               >
                 6
@@ -116,7 +117,7 @@ class Stafflist extends Component {
         </div>
         <div className="row">
           {list}
-          <div className="col-12 col-md-12">
+          <div className="col-12 col-md-12" style={{ marginTop: "10px" }}>
             {this.renderStaff(this.state.selectedStaff)}
           </div>
         </div>
