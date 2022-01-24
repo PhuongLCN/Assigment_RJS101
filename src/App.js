@@ -8,13 +8,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      staffs: STAFFS
+      staffs: STAFFS //staffs = STAFFS import from staffs.jsx
     };
   }
   render() {
     return (
       <div className="App">
-        <Navbar color="warning"
+        <Navbar color="warning" //Add Navbar
           expand="md"
           full
           light>
