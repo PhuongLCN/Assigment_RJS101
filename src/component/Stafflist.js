@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Card, CardText, CardBody, CardTitle, Button
+  Card, CardText, CardBody, CardTitle, Button, CardImg
 } from 'reactstrap';
 import dateFormat from 'dateformat';
 
@@ -11,19 +11,12 @@ class Stafflist extends Component {
     super(props);
 
     this.state = {
-      selectedStaff: null, //khởi tạo selectedStaff = null
-      class_div: "col-12 col-md-4" //khởi tạo số cột ban đầu là 3 khi load page
+      selectedStaff: null, //khởi tạo selectedStaff = null      
     }
   }
 
   onStaffSelect(staff) {
     this.setState({ selectedStaff: staff }); //selectedStaff = staff khi click vào button
-  }
-
-  onColumnChange(columnNum) {
-    var temp = 12 / columnNum; //tính số cột theo button được chọn
-    var changecol = "col-12 col-md-" + temp; //css cho số cột hiển thị
-    this.setState({ class_div: changecol }); //class_div => changecol
   }
 
   renderStaff(staff) {
@@ -53,73 +46,31 @@ class Stafflist extends Component {
   render() {
     //khởi tạo biến list map theo từng staff
     const list = this.props.staffs.map((staff) => {
-      return ( //hiển thị thông tin "name" toàn bộ nhân viên trong staffs.jsx
-        /*set số cột theo class_div */
-        <div className={this.state.class_div}>
+      return ( //hiển thị thông tin "name" toàn bộ nhân viên trong staffs.jsx        
+        <div className="col-6 col-sm-4 col-md-2">
           <Card
             style={{ marginTop: "10px" }}
             body
             color="warning"
             outline>
+            {/* hiển thị "ảnh" nhân viên */}
+            <CardImg width="100%" src={staff.image} alt={staff.name} />
             {/* hiển thị "name" nhân viên */}
             <CardTitle tag="h5">{staff.name}</CardTitle>
             {/* tạo button "Xem thông tin", khi click thì gọi hàm onStaffSelect(staff)*/}
             <Button key={staff.id}
-              onClick={() => this.onStaffSelect(staff)}>Xem thông tin</Button>
+              onClick={() => this.onStaffSelect(staff)}>Chi tiết</Button>
           </Card>
         </div>
       );
     });
 
     return (
-      <div className="container">
-        {/*Tạo button hiển thị thông tin theo số cột*/}
+      <div className='container'>
         <div className="row">
-          <h6 style={{ textAlign: "left" }, { margin: "25px" }}>Số cột hiển thị:</h6>
-        </div>
-        <div className="row">
-          <div style={{ marginTop: "0px" }, { marginLeft: "25px" }}>
-            <Button
-              onClick={() => this.onColumnChange(1)} //khi button "1" click gọi hàm onColumnChange(1)
-              color="primary"
-              outline
-            >
-              1
-            </Button>
-            {' '}
-            <Button
-              onClick={() => this.onColumnChange(2)}//khi button "2" click gọi hàm onColumnChange(2)
-              outline>
-              2
-            </Button>
-            {' '}
-            <Button
-              onClick={() => this.onColumnChange(3)}//khi button "3" click gọi hàm onColumnChange(3)
-              color="success"
-              outline
-            >
-              3
-            </Button>
-            {' '}
-            <Button
-              onClick={() => this.onColumnChange(4)}//khi button "4" click gọi hàm onColumnChange(4)
-              color="info"
-              outline
-            >
-              4
-            </Button>
-            {' '}
-            <Button
-              onClick={() => this.onColumnChange(6)}//khi button "6" click gọi hàm onColumnChange(6)
-              color="warning"
-              outline
-            >
-              6
-            </Button>
+          <div className='col-12'>
+            <h2 style={{ textAlign: "left" }}>Danh sách nhân viên</h2>
           </div>
-
-        </div>
-        <div className="row">
           {/*hiển thị list*/}
           {list}
           <div className="col-12 col-md-12" style={{ marginTop: "10px" }}>
@@ -127,7 +78,7 @@ class Stafflist extends Component {
             {this.renderStaff(this.state.selectedStaff)}
           </div>
         </div>
-      </div >
+      </div>
 
     );
   }
