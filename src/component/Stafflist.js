@@ -16,7 +16,7 @@ class Stafflist extends Component {
       return ( //hiển thị thông tin "name" toàn bộ nhân viên trong staffs.jsx        
         <div className="col-6 col-sm-4 col-md-2">
           <Card
-            style={{ marginTop: "10px" }}
+            style={{ margin: "10px 0px" }}
             body
             color="warning"
             outline>

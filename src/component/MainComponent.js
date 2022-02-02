@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { STAFFS } from "../shared/staffs";
 import {DEPARTMENTS} from "../shared/staffs"
 import Deparment from './Department';
+import Salary from './Salary';
 
 class Main extends Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class Main extends Component {
                     <Route exact path='/stafflist' component={() => <Stafflist staffs={this.state.staffs} />} />
                     <Route path='/stafflist/:id' component={StaffWithId} />
                     <Route exact path='/dept' component={() => <Deparment depts={this.state.depts} />} />
+                    <Route exact path='/salary' component={() => <Salary staffs={this.state.staffs} />} />
                     <Redirect to='/stafflist' />
                 </Switch>
                 <Footer />
