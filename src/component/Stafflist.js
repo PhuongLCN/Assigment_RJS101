@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Card, CardText, CardBody, CardTitle, Button, CardImg, 
+  Card, CardText, CardBody, CardTitle, Button, CardImg,
 } from 'reactstrap';
-import Staffdetail from "./Staffdetail";
+import { Link } from 'react-router-dom'
 
 class Stafflist extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      selectedStaff: null, //khởi tạo selectedStaff = null      
-    }
-  }
-
-  onStaffSelect(staff) {
-    this.setState({ selectedStaff: staff }); //selectedStaff = staff khi click vào button
   }
 
   render() {
@@ -28,13 +20,12 @@ class Stafflist extends Component {
             body
             color="warning"
             outline>
-            {/* hiển thị "ảnh" nhân viên */}
-            <CardImg width="100%" src={staff.image} alt={staff.name} />
-            {/* hiển thị "name" nhân viên */}
-            <CardTitle tag="h5" style={{textAlign:"center"}}>{staff.name}</CardTitle>
-            {/* tạo button "Xem thông tin", khi click thì gọi hàm onStaffSelect(staff)*/}
-            <Button key={staff.id}
-              onClick={() => this.onStaffSelect(staff)}>Chi tiết</Button>
+            <Link to={`/stafflist/${staff.id}`}>
+              {/* hiển thị "ảnh" nhân viên */}
+              <CardImg width="100%" src={staff.image} alt={staff.name} />
+              {/* hiển thị "name" nhân viên */}
+              <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
+            </Link>
           </Card>
         </div>
       );
@@ -43,15 +34,12 @@ class Stafflist extends Component {
     return (
       <div className='container'>
         <div className="row">
-          <div className='col-12'>
-            <h2 style={{ textAlign: "left" }}>Danh sách nhân viên</h2>
+          <div className="col-12">
+            <h3>Nhân viên</h3>
+            <hr />
           </div>
           {/*hiển thị list*/}
           {list}
-          <div className="col-12 col-md-12" style={{ marginTop: "10px" }}>
-            {/*rederStaff(selectedStaff)*/}            
-            <Staffdetail staff={this.state.selectedStaff} />
-          </div>
         </div>
       </div>
 

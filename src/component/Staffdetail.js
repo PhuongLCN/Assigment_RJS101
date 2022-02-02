@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import {
-    Card, CardText, CardBody, CardTitle, Button, CardImg,
+    Card, CardText, CardBody, CardTitle, Button, CardImg, Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
 import dateFormat from 'dateformat';
+import { Link } from 'react-router-dom';
 
 class Staffdetail extends Component {
     render() {
         const { staff } = this.props;
         return (
-            <div>
-                {this.renderStaff(staff)}
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/stafflist">Nhan vien</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.staff.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{this.props.staff.name}</h3>
+                        <hr />
+                    </div>
+                </div>
+                <div>
+                    {this.renderStaff(staff)}
+                </div>
+
             </div>
         );
     }
@@ -19,7 +33,7 @@ class Staffdetail extends Component {
                 <Card
                     color="warning"
                     outline
-                    style={{marginBottom:"10px"}}>
+                    style={{ marginBottom: "10px" }}>
                     <CardBody style={{ textAlign: "left" }}>
                         <CardTitle tag="h5">Họ và tên: {staff.name}</CardTitle>
                         <ul>
