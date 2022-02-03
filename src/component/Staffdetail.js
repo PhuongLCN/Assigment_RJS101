@@ -12,13 +12,9 @@ class Staffdetail extends Component {
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to="/stafflist">Nhan vien</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to="/stafflist">Nhân viên</Link></BreadcrumbItem>
                         <BreadcrumbItem active>{this.props.staff.name}</BreadcrumbItem>
                     </Breadcrumb>
-                    <div className="col-12">
-                        <h3>{this.props.staff.name}</h3>
-                        <hr />
-                    </div>
                 </div>
                 <div>
                     {this.renderStaff(staff)}
@@ -29,22 +25,38 @@ class Staffdetail extends Component {
     }
     renderStaff(staff) {
         if (staff != null) //khi click vào button "Xem thông tin"
-            return ( //hiển thị thông tin nhân viên theo staff        
-                <Card
-                    color="warning"
-                    outline
-                    style={{ marginBottom: "10px" }}>
-                    <CardBody style={{ textAlign: "left" }}>
-                        <CardTitle tag="h5">Họ và tên: {staff.name}</CardTitle>
-                        <ul>
-                            <li><CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText></li>
-                            <li><CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText></li>
-                            <li><CardText>Phòng ban: {staff.department.id}</CardText></li>
-                            <li><CardText>Số ngày nghỉ: {staff.annualLeave}</CardText></li>
-                            <li><CardText>Số ngày đi làm thêm: {staff.overTime}</CardText></li>
-                        </ul>
-                    </CardBody>
-                </Card>
+            return ( //hiển thị thông tin nhân viên theo staff  
+                <div className="container">
+                    <div className="row">
+                        <div className='col-12 col-sm-4 col-md-3'>
+                            <Card
+                             style={{ margin: "10px 0px" }}                             
+                             color="warning"
+                             outline>
+                                <CardImg width="100%" src={staff.image} alt={staff.name} />
+                            </Card>
+                        </div>
+                        <div className='col-12 col-sm-8 col-md-9'>
+                            <Card
+                                style={{ margin: "10px 0px" }}
+                                body
+                                color="warning"
+                                outline>
+                                <CardBody style={{ textAlign: "left" }}>
+                                    <CardTitle tag="h5">Họ và tên: {staff.name}</CardTitle>
+                                    <ul>
+                                        <li><CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText></li>
+                                        <li><CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText></li>
+                                        <li><CardText>Phòng ban: {staff.department.id}</CardText></li>
+                                        <li><CardText>Số ngày nghỉ: {staff.annualLeave}</CardText></li>
+                                        <li><CardText>Số ngày đi làm thêm: {staff.overTime}</CardText></li>
+                                    </ul>
+                                </CardBody>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+
             );
         else //khi không click vào button "Xem thông tin"
             return (
