@@ -1,4 +1,4 @@
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar, NavbarBrand, InputGroup, InputGroupText, Input } from 'reactstrap';
 import React, { Component } from 'react';
 import Stafflist from "./Stafflist";
 import Header from './HeaderComponent';
@@ -6,7 +6,7 @@ import Footer from './FooterComponent';
 import Staffdetail from './Staffdetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { STAFFS } from "../shared/staffs";
-import {DEPARTMENTS} from "../shared/staffs"
+import { DEPARTMENTS } from "../shared/staffs"
 import Deparment from './Department';
 import Salary from './Salary';
 
@@ -26,7 +26,7 @@ class Main extends Component {
         };
         return (
             <div className="App">
-                <Header />
+                <Header />                
                 <Switch>
                     <Route exact path='/stafflist' component={() => <Stafflist staffs={this.state.staffs} />} />
                     <Route path='/stafflist/:filterID' component={StaffWithId} />
