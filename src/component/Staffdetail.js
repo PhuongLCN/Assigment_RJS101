@@ -7,16 +7,20 @@ import { Link } from 'react-router-dom';
 
 class Staffdetail extends Component {
     render() {
+        //create {staff}
         const { staff } = this.props;
         return (
             <div className="container">
                 <div className="row">
+                    {/*Create Breadcrumb*/}
                     <Breadcrumb>
+                        {/*Link to /stafflist*/}
                         <BreadcrumbItem><Link to="/stafflist">Nhân viên</Link></BreadcrumbItem>
                         <BreadcrumbItem active>{this.props.staff.name}</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
                 <div>
+                    {/*call function renderStaff*/}
                     {this.renderStaff(staff)}
                 </div>
 
@@ -24,19 +28,21 @@ class Staffdetail extends Component {
         );
     }
     renderStaff(staff) {
-        if (staff != null) //khi click vào button "Xem thông tin"
-            return ( //hiển thị thông tin nhân viên theo staff  
+        if (staff != null) //staff clicked
+            return (
                 <div className="container">
                     <div className="row">
                         <div className='col-12 col-sm-4 col-md-3'>
+                            {/*Show staff image*/}
                             <Card
-                             style={{ margin: "10px 0px" }}                             
-                             color="warning"
-                             outline>
+                                style={{ margin: "10px 0px" }}
+                                color="warning"
+                                outline>
                                 <CardImg width="100%" src={staff.image} alt={staff.name} />
                             </Card>
                         </div>
                         <div className='col-12 col-sm-8 col-md-9'>
+                            {/*Show staff detail*/}
                             <Card
                                 style={{ margin: "10px 0px" }}
                                 body
@@ -47,7 +53,7 @@ class Staffdetail extends Component {
                                     <ul>
                                         <li><CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText></li>
                                         <li><CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText></li>
-                                        <li><CardText>Phòng ban: {staff.department.id}</CardText></li>
+                                        <li><CardText>Phòng ban: {staff.department.name}</CardText></li>
                                         <li><CardText>Số ngày nghỉ: {staff.annualLeave}</CardText></li>
                                         <li><CardText>Số ngày đi làm thêm: {staff.overTime}</CardText></li>
                                     </ul>
@@ -58,7 +64,7 @@ class Staffdetail extends Component {
                 </div>
 
             );
-        else //khi không click vào button "Xem thông tin"
+        else
             return (
                 <div></div>
             );

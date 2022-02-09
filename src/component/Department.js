@@ -5,18 +5,21 @@ class Deparment extends Component {
     constructor(props) {
         super(props);
     }
-   
+
     render() {
-        //khởi tạo biến list map theo từng staff
+        //create department map to DEPARTMENTS from staffs.js
         const department = this.props.depts.map((dept) => {
-            return ( //hiển thị thông tin "name" toàn bộ nhân viên trong staffs.jsx        
+            return (
                 <div className="col-12 col-sm-6 col-md-4">
+                    {/*create deparment card*/}
                     <Card
                         style={{ margin: "10px 0px" }}
                         body
                         color="warning"
                         outline>
+                        {/*show department name*/}
                         <CardTitle tag="h5" style={{ textAlign: "center" }}>{dept.name}</CardTitle>
+                        {/*show department numberofstaff*/}
                         <CardText style={{ textAlign: "center" }}>Số lượng nhân viên {dept.numberOfStaff}</CardText>
                     </Card>
                 </div>
@@ -26,7 +29,9 @@ class Deparment extends Component {
         return (
             <div className='container'>
                 <div className="row">
+                    {/*Create Breadcrumb*/}
                     <Breadcrumb>
+                        {/*Link to /stafflist*/}
                         <BreadcrumbItem><Link to="/stafflist">Nhân viên</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Phòng ban</BreadcrumbItem>
                     </Breadcrumb>
@@ -34,7 +39,7 @@ class Deparment extends Component {
                         <h3>Phòng ban</h3>
                         <hr />
                     </div>
-                    {/*hiển thị deparment*/}
+                    {/*Show department list*/}
                     {department}
                 </div>
             </div>

@@ -11,19 +11,21 @@ class Stafflist extends Component {
   }
 
   render() {
-    //khởi tạo biến list map theo từng staff
+    //create list map to STAFFS from staffs.jx => show stafflist
     const list = this.props.staffs.map((staff) => {
-      return ( //hiển thị thông tin "name" toàn bộ nhân viên trong staffs.jsx        
+      return (        
         <div className="col-6 col-sm-4 col-md-2">
+          {/* Create staff card */}
           <Card
             style={{ margin: "10px 0px" }}
             body
             color="warning"
             outline>
+            {/* Link to staff.id */}
             <Link to={`/stafflist/${staff.id}`}>
-              {/* hiển thị "ảnh" nhân viên */}
+              {/* show staff image*/}
               <CardImg width="100%" src={staff.image} alt={staff.name} />
-              {/* hiển thị "name" nhân viên */}
+              {/* show staff name */}
               <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
             </Link>
           </Card>
@@ -38,7 +40,7 @@ class Stafflist extends Component {
             <h3>Nhân viên</h3>
             <hr />
           </div>
-          {/*hiển thị list*/}
+          {/*show staff list*/}
           {list}
         </div>
       </div>
