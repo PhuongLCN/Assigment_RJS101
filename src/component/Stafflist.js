@@ -1,19 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
-  Card, CardText, CardBody, CardTitle, Button, CardImg,
+  Card, Nav, NavItem, CardTitle, Button, CardImg, Label, Form, Input
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
-class Stafflist extends Component {
 
+class Stafflist extends Component {
   constructor(props) {
     super(props);
-  }
+    this.state = {
+      searchKey: ""
+  };
+    this.handleSearch = this.handleSearch.bind(this);
 
+  }
+  handleSearch(event) {
+    event.preventDefault();
+    this.setState({ searchKey: this.searchStaff.value }); 
+  }
   render() {
-    //create list map to STAFFS from staffs.jx => show stafflist
-    const list = this.props.staffs.map((staff) => {
-      return (        
+    //create list map to STAFFS from staffs.jx => show stafflist    
+    const list = this.props.staffs.filter((staff) => {
+      if (this.state.searchKey == "") {
+        return staff
+      } else if (staff.name.toLowerCase().includes(this.state.searchKey.toLowerCase())) {
+        return staff
+      }
+    }).map((staff) => {
+      return (
         <div className="col-6 col-sm-4 col-md-2">
           {/* Create staff card */}
           <Card
@@ -35,11 +49,26 @@ class Stafflist extends Component {
 
     return (
       <div className='container'>
-        <div className="row">
-          <div className="col-12">
+        <div className="row" style={{ margin: "20px 0px" }}>
+          <div className="col-7">
             <h3>Nhân viên</h3>
-            <hr />
           </div>
+          <div className="col-3">
+            <Input type="text" id="searchStaff" name="search" placeholder="Tên..."
+              innerRef={(input) => this.searchStaff = input} />
+          </div>
+          <div className="col-1">
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <Form>
+                  <Button onClick={this.handleSearch} color="info" type="submit"><span className="fa fa-search"></span> Tìm kiếm</Button>
+                </Form>
+              </NavItem>
+            </Nav>
+          </div>
+        </div>
+        <hr />
+        <div className="row">
           {/*show staff list*/}
           {list}
         </div>
