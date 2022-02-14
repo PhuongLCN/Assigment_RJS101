@@ -21,8 +21,7 @@ class Main extends Component {
 
     }
 
-    addNewStaff(staff){
-        alert(JSON.stringify(staff));
+    addNewStaff(staff){        
         var newStaffs = this.state.staffs;
         newStaffs.push(staff);
         this.setState({

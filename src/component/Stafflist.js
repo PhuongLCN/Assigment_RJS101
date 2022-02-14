@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import {
   Card, Nav, NavItem, CardTitle, Button, CardImg, Label, Form, Input,
   Modal, ModalHeader, ModalBody, FormGroup, Col
@@ -25,7 +25,6 @@ class Stafflist extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-
   }
   handleSearch(event) {
     event.preventDefault();
@@ -43,12 +42,6 @@ class Stafflist extends Component {
       formattedValue: formattedValue // Formatted String, ex: "11/19/2016"
     })
   }
-  componentDidUpdate() {
-    // Access ISO String and formatted values from the DOM.
-    var hiddenInputElement = document.getElementById("example-datepicker");
-    console.log(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z"
-    console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016"
-  }
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -59,7 +52,6 @@ class Stafflist extends Component {
   }
 
   handleSubmitAdd(event) {
-    console.log('Current State is: ' + JSON.stringify(this.state));
     event.preventDefault();
     const newStaff = {
       id: ++id,
@@ -67,7 +59,7 @@ class Stafflist extends Component {
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
       startDate: this.state.startDate,
-      department:{name: this.state.department},
+      department: { name: this.state.department },
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       image: '/assets/images/alberto.png',
@@ -75,7 +67,7 @@ class Stafflist extends Component {
     this.props.addNewStaff(newStaff);
     this.setState({
       name: "",
-      doB:"",
+      doB: "",
       startDate: "",
       salaryScale: "",
       annualLeave: "",
@@ -120,10 +112,10 @@ class Stafflist extends Component {
       <div className='container'>
         <div className="row" style={{ margin: "20px 0px" }}>
           <div className="col-4">
-            <h3>Nhân viên</h3>            
+            <h3>Nhân viên</h3>
           </div>
           <div className='col-3' style={{ textAlign: "right" }}>
-          <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
                 <Button outline onClick={this.toggleModal}><span className="fa fa-plus"></span> Thêm nhân viên</Button>
               </NavItem>
