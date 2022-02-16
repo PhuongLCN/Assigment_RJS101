@@ -4,8 +4,8 @@ import {
   Modal, ModalHeader, ModalBody, FormGroup, Col, FormFeedback
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
-var id = 15;
 
+var id = 15; //create staffId from staffs.js
 class Stafflist extends Component {
   constructor(props) {
     super(props);
@@ -34,16 +34,16 @@ class Stafflist extends Component {
   }
   handleBlur = (field) => (evt) => {
     this.setState({
-      touched: { ...this.state.touched, [field]: true }
+      touched: { ...this.state.touched, [field]: true } //set touched :{} => true
     });
   }
+  //Validate for "name", "dob", "startDate"
   validate(name, doB, startDate) {
     const errors = {
       name: "",
       doB: null,
       startDate: null,
     };
-
     if (this.state.touched.name && name.length == 0) {
       errors.name = 'Yêu cầu nhập';
     }
@@ -61,10 +61,12 @@ class Stafflist extends Component {
     }
     return errors;
   }
+  //function for search staff when click Search Button
   handleSearch(event) {
     event.preventDefault();
-    this.setState({ searchKey: this.searchStaff.value });
+    this.setState({ searchKey: this.searchStaff.value }); //searchKey = "keywords"
   }
+  //function for input change
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -73,17 +75,19 @@ class Stafflist extends Component {
       [name]: value
     });
   }
+  //function for add staff via modaltoggle when click Submit
   handleSubmitAdd(event) {
     event.preventDefault();
     this.setState({
-      touched: { ...this.state.touched, ["name"]: true, ["doB"]: true, ["startDate"]: true }
-    });
-    const errors = this.validate(this.state.name, this.state.doB, this.state.startDate);
+      touched: { ...this.state.touched, ["name"]: true, ["doB"]: true, ["startDate"]: true } //set touched:{} ==> true ==> validation enable
+    });    
+    //condition set forceValidate = true ==> validation enable
     if (this.state.name == "" || this.state.name.length <= 2 || this.state.name.length > 30 || this.state.doB == null || this.state.startDate == null) {
       this.state.forceValidate = true
     } else {
       this.state.forceValidate = false
     }
+    //forceValidate = false => create newStaff
     if (this.state.forceValidate === false) {
       const newStaff = {
         id: ++id,
@@ -95,8 +99,10 @@ class Stafflist extends Component {
         annualLeave: this.state.annualLeave,
         overTime: this.state.overTime,
         image: '/assets/images/alberto.png',
-      }
-      this.props.addNewStaff(newStaff);
+      }      
+      //add newStaff to Stafflist
+      this.props.addNewStaff(newStaff);      
+      //reset modaltoggle
       this.setState({
         name: "",
         doB: {},
@@ -108,18 +114,18 @@ class Stafflist extends Component {
     }
 
   }
+  //open Modaltoggle when click "Add button"
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen
     });
   }
   render() {
-
     //create list map to STAFFS from staffs.jx => show stafflist    
     const list = this.props.staffs.filter((staff) => {
       if (this.state.searchKey == "") {
         return staff
-      } else if (staff.name.toLowerCase().includes(this.state.searchKey.toLowerCase())) {
+      } else if (staff.name.toLowerCase().includes(this.state.searchKey.toLowerCase())) { //condition for searchKey
         return staff
       }
     }).map((staff) => {
@@ -142,6 +148,7 @@ class Stafflist extends Component {
         </div>
       );
     });
+    //create errors from validate function
     const errors = this.validate(this.state.name, this.state.doB, this.state.startDate);
     return (
       <div className='container'>
@@ -151,10 +158,11 @@ class Stafflist extends Component {
           </div>
           <div className='col-sm-3 col-5' style={{ textAlign: "right" }}>
             <Nav className="ml-auto" navbar>
-              <NavItem>
+              <NavItem> {/*creat toggleModal button */}
                 <Button outline onClick={this.toggleModal}><span className="fa fa-plus"></span> Thêm</Button>
               </NavItem>
             </Nav>
+            {/*ToggleModal form */}
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
               <ModalHeader toggle={this.toggleModal}>Nhập thông tin nhân viên</ModalHeader>
               <ModalBody>
@@ -163,18 +171,20 @@ class Stafflist extends Component {
                   <FormGroup row>
                     <Label htmlFor="name" md={3}><b>Tên</b></Label>
                     <Col md={9}>
+                      {/*Name input*/}
                       <Input type="text" id="name" name="name"
                         value={this.state.name}
-                        invalid={errors.name !== ""}
-                        onBlur={this.handleBlur("name")}
-                        onChange={this.handleInputChange}
+                        invalid={errors.name !== ""} //enable validation
+                        onBlur={this.handleBlur("name")} //when blur mouse
+                        onChange={this.handleInputChange} //show input
                       />
-                      <FormFeedback>{errors.name}</FormFeedback>
+                      <FormFeedback>{errors.name}</FormFeedback> {/*show notification*/}
                     </Col>
                   </FormGroup>
                   <FormGroup row>
                     <Label htmlFor="doB" md={3}><b>Ngày sinh</b></Label>
                     <Col md={9}>
+                      {/*Date of Birth input*/}
                       <Input type="date" id="doB" name="doB"
                         value={this.state.doB}
                         invalid={errors.doB !== null}
@@ -187,6 +197,7 @@ class Stafflist extends Component {
                   <FormGroup row>
                     <Label htmlFor="startDate" md={3}><b>Ngày vào công ty</b></Label>
                     <Col md={9}>
+                      {/*Start Date input*/}
                       <Input type="date" id="startDate" name="startDate"
                         value={this.state.startDate}
                         invalid={errors.startDate !== null}
@@ -199,6 +210,7 @@ class Stafflist extends Component {
                   <FormGroup row>
                     <Label htmlFor="Dept" md={3}><b>Phòng ban</b></Label>
                     <Col md={9}>
+                      {/*Deparment option input*/}
                       <Input type="select" name="department"
                         value={this.state.department}
                         onChange={this.handleInputChange}>
@@ -213,6 +225,7 @@ class Stafflist extends Component {
                   <FormGroup row>
                     <Label htmlFor="salaryScale" md={3}><b>Hệ số lương</b></Label>
                     <Col md={9}>
+                      {/*Salary Scale input*/}
                       <Input type="number" id="salaryScale" name="salaryScale"
                         value={this.state.salaryScale}
                         onChange={this.handleInputChange} />
@@ -221,6 +234,7 @@ class Stafflist extends Component {
                   <FormGroup row>
                     <Label htmlFor="annualLeave" md={3}><b>Số ngày nghỉ còn lại</b></Label>
                     <Col md={9}>
+                      {/*Annual Leave input*/}
                       <Input type="number" id="annualLeave" name="annualLeave"
                         value={this.state.annualLeave}
                         onChange={this.handleInputChange}></Input>
@@ -229,6 +243,7 @@ class Stafflist extends Component {
                   <FormGroup row>
                     <Label htmlFor="overTime" md={3}><b>Số ngày làm thêm</b></Label>
                     <Col md={9}>
+                      {/*Over Time input*/}
                       <Input type="number" id="overTime" name="overTime"
                         value={this.state.overTime}
                         onChange={this.handleInputChange}></Input>
@@ -246,6 +261,7 @@ class Stafflist extends Component {
             </Modal>
           </div>
           <div className="col-sm-3 col-7" style={{ textAlign: "right" }}>
+            {/*create Search by Uncontrolled Form */}
             <Input type="text" id="searchStaff" name="search" placeholder="Tên..."
               innerRef={(input) => this.searchStaff = input} />
           </div>

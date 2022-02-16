@@ -17,18 +17,17 @@ class Main extends Component {
             staffs: STAFFS, //create staffs = STAFFS import from staffs.jsx
             depts: DEPARTMENTS //create depts = DEPARTMANET import from staffs.jsx
         };
-        this.addNewStaff=this.addNewStaff.bind(this);   
+        this.addNewStaff = this.addNewStaff.bind(this);
 
     }
 
-    addNewStaff(staff){
-        alert(JSON.stringify(staff));
+    addNewStaff(staff) {
         var newStaffs = this.state.staffs;
         newStaffs.push(staff);
         this.setState({
-            staffs:newStaffs
-          })
-      }
+            staffs: newStaffs
+        })        
+    }
 
     render() {
         const StaffWithId = ({ match }) => {
@@ -38,7 +37,7 @@ class Main extends Component {
         };
         return (
             <div className="App">
-                <Header />                
+                <Header />
                 <Switch>
                     {/*Link to Stafflist*/}
                     <Route exact path='/stafflist' component={() => <Stafflist staffs={this.state.staffs} addNewStaff={this.addNewStaff} />} />
