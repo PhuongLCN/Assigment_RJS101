@@ -10,7 +10,6 @@ var id = 15; //create staffId from staffs.js
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
-const isNumber = (val) => !isNaN(Number(val));
 class Stafflist extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,6 @@ class Stafflist extends Component {
   //function for add staff via modaltoggle when click Submit
   handleSubmitAdd(values) {
     //create newStaff
-    alert('Current State is: ' + JSON.stringify(values));
     const newStaff = {
       id: ++id,
       name: values.name,
@@ -50,7 +48,6 @@ class Stafflist extends Component {
       image: '/assets/images/alberto.png',
     }
     //add newStaff to Stafflist
-    alert('Current State is: ' + JSON.stringify(newStaff));
     this.props.addNewStaff(newStaff);
     //reset modaltoggle
     this.setState({
