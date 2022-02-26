@@ -7,6 +7,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Deparment from './Department';
 import Salary from './Salary';
 import { connect } from 'react-redux';
+import { addStaff, fetchStaffs } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -14,31 +15,36 @@ const mapStateToProps = state => {
         depts: state.depts,
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    addStaff: (name, doB, salaryScale, startDate,
+        department, annualLeave, overTime, image) => dispatch(addStaff(name, doB, salaryScale,
+            startDate, department, annualLeave, overTime, image)),
+    fetchStaffs: () => { dispatch(fetchStaffs()) }
+});
+
 class Main extends Component {
     constructor(props) {
         super(props);
-        this.addNewStaff = this.addNewStaff.bind(this);
     }
-    addNewStaff(staff) {
-        var newStaffs = this.props.staffs;
-        newStaffs.push(staff);
-        this.setState({
-            staffs: newStaffs
-        })
+    componentDidMount() {
+        this.props.fetchStaffs();
     }
-
     render() {
         const StaffWithId = ({ match }) => {
             return (
                 //Show Staffdetail from staff.id filter
-                <Staffdetail staff={this.props.staffs.filter((staff) => staff.id === parseInt(match.params.filterID, 10))[0]} />);
+                <Staffdetail staff={this.props.staffs.staffs.filter((staff) => staff.id === parseInt(match.params.filterID, 10))[0]}
+                    isLoading={this.props.staffs.isLoading}
+                    errMess={this.props.staffs.errMess} />);
+
         };
         return (
             <div className="App">
                 <Header />
                 <Switch>
                     {/*Link to Stafflist*/}
-                    <Route exact path='/stafflist' component={() => <Stafflist staffs={this.props.staffs} addNewStaff={this.addNewStaff} />} />
+                    <Route exact path='/stafflist' component={() => <Stafflist staffs={this.props.staffs} addStaff={this.props.addStaff} />} />
                     {/*Link to Staffdetail when click Staffid*/}
                     <Route path='/stafflist/:filterID' component={StaffWithId} />
                     {/*Link to Deparment*/}
@@ -54,4 +60,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

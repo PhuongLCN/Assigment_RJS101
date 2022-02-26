@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
-    Card, CardText, CardBody, CardTitle, Button, CardImg, Breadcrumb, BreadcrumbItem
+    Card, CardText, CardBody, CardTitle, CardImg, Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
 import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
+import {Loading} from './LoadingComponent'
 
 class Staffdetail extends Component {
     render() {
@@ -28,7 +29,25 @@ class Staffdetail extends Component {
         );
     }
     renderStaff(staff) {
-        if (staff != null) //staff clicked
+        if (this.props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{this.props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if (staff != null) //staff clicked
             return (
                 <div className="container">
                     <div className="row">
