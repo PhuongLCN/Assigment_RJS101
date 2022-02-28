@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 
 class DepartmentDetail extends Component {
     constructor(props) {
-        super(props);
-        
+        super(props);        
     }
     render() {
         const list = this.props.staffs.map((staff) => {

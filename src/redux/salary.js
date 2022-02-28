@@ -7,7 +7,9 @@ export const Salary = (state = {
 }, action) => {
     switch (action.type) {
         case ActionTypes.ADD_SALARY:
-            return { ...state, isLoading: false, errMess: null, salary: action.payload };                
+            return { ...state, isLoading: false, errMess: null, salary: action.payload };
+        case ActionTypes.SALARY_LOADING:
+            return { ...state, isLoading: true, errMess: null, salary: [] }
         default:
             return state;
     }

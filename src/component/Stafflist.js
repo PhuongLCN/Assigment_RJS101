@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Card, Nav, NavItem, CardTitle, Button, CardImg, Label, Form, Input,
-  Modal, ModalHeader, ModalBody, Row, Col
+  Modal, ModalHeader, ModalBody, Row, Col, Alert
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import { Control, LocalForm, Errors } from 'react-redux-form';
@@ -35,9 +35,22 @@ class Stafflist extends Component {
   }
   //function for add staff via modaltoggle when click Submit
   handleSubmitAdd(values) {
+    var deptId = '';
+    if (values.department == 'Sale') {
+      deptId = 'Dept01'
+    } else if (values.department == 'HR') {
+      deptId = 'Dept02'
+    } else if (values.department == 'Marketing') {
+      deptId = 'Dept03'
+    } else if (values.department == 'IT') {
+      deptId = 'Dept04'
+    }
+    else if (values.department == 'Finance') {
+      deptId = 'Dept05'
+    }
     //add newStaff to Stafflist
-    this.props.addNewStaff(values.name, values.doB, values.salaryScale, values.startDate, { name: values.department },
-      values.annualLeave, values.overTime, '/assets/images/alberto.png')
+    this.props.postNewStaff(values.name, values.doB, values.salaryScale, values.startDate, deptId,
+      values.annualLeave, values.overTime, '/asset/images/alberto.png')
     //reset modaltoggle
     this.setState({
       name: "",
@@ -58,7 +71,6 @@ class Stafflist extends Component {
   render() {
     //create list map to STAFFS from staffs.jx => show stafflist 
     const list = this.props.staffs.staffs.filter((staff) => {
-      
       if (this.state.searchKey == "") {
         return staff
       } else if (staff.name.toLowerCase().includes(this.state.searchKey.toLowerCase())) { //condition for searchKey
@@ -74,17 +86,19 @@ class Stafflist extends Component {
             color="warning"
             outline>
             {/* Link to staff.id */}
-            <Link to={`/stafflist/${staff.id}`}>
-              {/* show staff image*/}
-              <CardImg width="100%" src={staff.image} alt={staff.name} />
-              {/* show staff name */}
-              <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
-            </Link>
+            {/* <Link to={`/stafflist/${staff.id}`}> */}
+            {/* show staff image*/}
+            <CardImg width="100%" src={staff.image} alt={staff.name} />
+            {/* show staff name */}
+            <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
+            {/* </Link> */}
+            <button></button>
           </Card>
         </div>
       );
     });
-    if (this.props.staffs.isLoading) {      
+    if (this.props.staffs.isLoading) {
+
       return (
         <div className="container">
           <div className="row">

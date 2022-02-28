@@ -7,35 +7,62 @@ export const addStaff = (staffs) => ({
 })
 
 export const fetchStaffs = () => (dispatch) => {
-    dispatch(staffsLoading(true));
     return fetch(baseUrl + 'staffs')
+    .then(response => {
+        if (response.ok) {
+            return response;
+        } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+        error => {
+            throw error;
+        })
     .then(response => response.json())
     .then(staffs => dispatch(addStaff(staffs)));
 }
-
-export const staffsLoading = () => ({
-    type: ActionTypes.STAFFS_LOADING
-});
-
 export const staffsFailed = (errmess) => ({
     type: ActionTypes.STAFFS_FAILED,
     payload: errmess
 });
 
-export const addNewStaff = (name, doB, salaryScale, startDate, department,
-    annualLeave, overTime, image) => ({
-    type: ActionTypes.ADD_NEWSTAFF,
-    payload: {
+export const postNewStaff = (name, doB, salaryScale, startDate, departmentId,
+    annualLeave, overTime, image) => (dispatch) =>{
+    const newStaff= {
         name: name,
         doB: doB,
         salaryScale: salaryScale,
         startDate: startDate,
-        department: department,
+        departmentId: departmentId,
         annualLeave: annualLeave,
         overTime: overTime,
         image: image
-    }
-});
+    };
+    return fetch(baseUrl + 'staffs', {
+        method: "POST",
+        body: JSON.stringify(newStaff),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(response => dispatch(addStaff(response)));       
+};
 export const addDeparment = (depts) => ({
     type: ActionTypes.ADD_DEPARTMENT,
     payload: depts
@@ -73,4 +100,3 @@ export const salaryFailed = (errmess) => ({
     type: ActionTypes.SALARY_FAILED,
     payload: errmess
 });
-

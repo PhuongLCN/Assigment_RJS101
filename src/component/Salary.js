@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Card, CardText, CardTitle, Breadcrumb, BreadcrumbItem
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardTitle, CardText } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 class Salary extends Component {
@@ -18,8 +16,8 @@ class Salary extends Component {
         return salary;
     } */
     render() {
-        //create list map to STAFFS from staffs.jx   
-
+       //alert(JSON.stringify(this.props.salary.salary[0]))
+        //create list map to STAFFS from staffs.jx
         const list = this.props.salary.salary.map((staff) => {
             return (
                 <div className="col-12 col-sm-6 col-md-4">

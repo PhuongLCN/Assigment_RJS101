@@ -10,7 +10,7 @@ class Deparment extends Component {
         //create department map to DEPARTMENTS from staffs.js        
         const department = this.props.depts.depts.map((dept) => {
             return (
-
+                
                 <div className="col-12 col-sm-6 col-md-4">
                     {/*create deparment card*/}
                     <Card
