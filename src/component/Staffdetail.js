@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
-import {Loading} from './LoadingComponent'
+import {Loading} from './LoadingComponent';
 
 class Staffdetail extends Component {
     render() {

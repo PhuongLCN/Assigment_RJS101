@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Card, CardText, CardBody, CardTitle, Button, CardImg, Breadcrumb, BreadcrumbItem
+    Card, CardText, CardTitle, Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
@@ -10,16 +10,17 @@ class Salary extends Component {
         super(props);
     }
     //Calculator Salary
-    calSalary(x, y) {
+    /* calSalary(x, y) {
         const basicSalary = 3000000;
         const overTimeSalary = 200000;
         var salary = 0;
         salary = (x * overTimeSalary + y * basicSalary).toFixed(0);
         return salary;
-    }
+    } */
     render() {
-        //create list map to STAFFS from staffs.jx       
-        const list = this.props.staffs.map((staff) => {
+        //create list map to STAFFS from staffs.jx   
+
+        const list = this.props.salary.salary.map((staff) => {
             return (
                 <div className="col-12 col-sm-6 col-md-4">
                     {/*Create Staff Card*/}
@@ -37,7 +38,7 @@ class Salary extends Component {
                         {/*Show staff overTime*/}
                         <CardText style={{ textAlign: "left" }}>Số giờ làm thêm: {staff.overTime}</CardText>
                         {/*Show staff salary from function calSalary*/}
-                        <CardText style={{ textAlign: "left" }, { color: "red" }}>Lương: {this.calSalary(staff.overTime, staff.salaryScale)}</CardText>
+                        <CardText style={{ textAlign: "left" }, { color: "red" }}>Lương: {staff.salary}</CardText>
                     </Card>
                 </div>
             );

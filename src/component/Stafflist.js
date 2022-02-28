@@ -36,7 +36,7 @@ class Stafflist extends Component {
   //function for add staff via modaltoggle when click Submit
   handleSubmitAdd(values) {
     //add newStaff to Stafflist
-    this.props.addStaff(values.name, values.doB, values.salaryScale, values.startDate, { name: values.department },
+    this.props.addNewStaff(values.name, values.doB, values.salaryScale, values.startDate, { name: values.department },
       values.annualLeave, values.overTime, '/assets/images/alberto.png')
     //reset modaltoggle
     this.setState({
@@ -255,7 +255,6 @@ class Stafflist extends Component {
             {list}
           </div>
         </div>
-
       );
   }
 }
