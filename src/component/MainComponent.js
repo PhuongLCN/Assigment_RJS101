@@ -18,7 +18,6 @@ const mapStateToProps = state => {
         salary: state.salary
     }
 }
-
 const mapDispatchToProps = dispatch => ({
     postNewStaff: (name, doB, salaryScale, startDate,
         department, annualLeave, overTime, image) => dispatch(postNewStaff(name, doB, salaryScale,
@@ -27,19 +26,16 @@ const mapDispatchToProps = dispatch => ({
     fetchDepartment: () => { dispatch(fetchDepartment()) },
     fetchSalary: () => { dispatch(fetchSalary()) }
 });
-
 class Main extends Component {
     constructor(props) {
         super(props);
     }
-
     componentDidMount() {
         this.props.fetchStaffs();
         this.props.fetchDepartment();
         this.props.fetchSalary();
     }
     render() {
-        //alert(JSON.stringify(this.props.staffs.staffs))
         /* const StaffWithId = ({ match }) => {
             return (
                 //Show Staffdetail from staff.id filter
@@ -50,11 +46,9 @@ class Main extends Component {
         }; */
         const DeptsWithId = ({ match }) => {
             return (
-
                 //Show Staffdetail from staff.id filter
                 <DepartmentDetail staffs={this.props.staffs.staffs.filter((staff) => staff.departmentId === match.params.filterID)}
                 />);
-
         };
         return (
             <div className="App">
@@ -81,5 +75,4 @@ class Main extends Component {
         );
     }
 }
-
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

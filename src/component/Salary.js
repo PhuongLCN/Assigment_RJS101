@@ -3,7 +3,6 @@ import { Breadcrumb, BreadcrumbItem, Card, CardTitle, CardText } from 'reactstra
 import { Link } from 'react-router-dom'
 
 class Salary extends Component {
-
     constructor(props) {
         super(props);
     }
@@ -16,7 +15,6 @@ class Salary extends Component {
         return salary;
     } */
     render() {
-       //alert(JSON.stringify(this.props.salary.salary[0]))
         //create list map to STAFFS from staffs.jx
         const list = this.props.salary.salary.map((staff) => {
             return (
@@ -41,7 +39,6 @@ class Salary extends Component {
                 </div>
             );
         });
-
         return (
             <div className='container'>
                 <div className="row">
@@ -63,6 +60,5 @@ class Salary extends Component {
         );
     }
 }
-
 export default Salary;
 

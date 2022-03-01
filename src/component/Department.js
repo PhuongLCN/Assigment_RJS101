@@ -5,12 +5,11 @@ class Deparment extends Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         //create department map to DEPARTMENTS from staffs.js        
         const department = this.props.depts.depts.map((dept) => {
             return (
-                
+
                 <div className="col-12 col-sm-6 col-md-4">
                     {/*create deparment card*/}
                     <Card
@@ -20,7 +19,7 @@ class Deparment extends Component {
                         outline>
                         {/*show department name*/}
                         <Link to={`/dept/${dept.id}`}>
-                        <CardTitle tag="h5" style={{ textAlign: "center" }}>{dept.name}</CardTitle>
+                            <CardTitle tag="h5" style={{ textAlign: "center" }}>{dept.name}</CardTitle>
                         </Link>
                         {/*show department numberofstaff*/}
                         <CardText style={{ textAlign: "center" }}>Số lượng nhân viên {dept.numberOfStaff}</CardText>
@@ -50,7 +49,4 @@ class Deparment extends Component {
         );
     }
 }
-
-
-
 export default Deparment;

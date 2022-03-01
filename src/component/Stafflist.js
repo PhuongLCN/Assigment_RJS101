@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Card, Nav, NavItem, CardTitle, Button, CardImg, Label, Form, Input,
-  Modal, ModalHeader, ModalBody, Row, Col, Alert
+  Modal, ModalHeader, ModalBody, Row, Col
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import { Control, LocalForm, Errors } from 'react-redux-form';
@@ -33,7 +33,7 @@ class Stafflist extends Component {
     event.preventDefault();
     this.setState({ searchKey: this.searchStaff.value });
   }
-  //function for add staff via modaltoggle when click Submit
+  //function for add staff via modaltoggle when click Submit 
   handleSubmitAdd(values) {
     var deptId = '';
     if (values.department == 'Sale') {
@@ -92,7 +92,6 @@ class Stafflist extends Component {
             {/* show staff name */}
             <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
             {/* </Link> */}
-            <button></button>
           </Card>
         </div>
       );

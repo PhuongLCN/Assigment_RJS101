@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-
 export const Depts = (state = {
     isLoading: true,
     errMess: null,
