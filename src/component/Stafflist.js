@@ -86,12 +86,12 @@ class Stafflist extends Component {
             color="warning"
             outline>
             {/* Link to staff.id */}
-            {/* <Link to={`/stafflist/${staff.id}`}> */}
+            <Link to={`/stafflist/${staff.id}`}>
             {/* show staff image*/}
             <CardImg width="100%" src={staff.image} alt={staff.name} />
             {/* show staff name */}
             <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
-            {/* </Link> */}
+            </Link>
           </Card>
         </div>
       );

@@ -7,10 +7,9 @@ export const Staffs = (state = {
 }, action) => {
     switch (action.type) {
         case ActionTypes.ADD_STAFF:
-            return { ...state, isLoading: false, errMess: null, staffs: action.payload };  
-              
+            return { ...state, isLoading: false, errMess: null, staffs: action.payload };
         case ActionTypes.STAFFS_FAILED:
-            return { ...state, isLoading: false, errMess: action.payload };       
+            return { ...state, isLoading: false, errMess: action.payload };
         default:
             return state;
     }

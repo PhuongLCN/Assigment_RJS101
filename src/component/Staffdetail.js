@@ -10,7 +10,7 @@ class Staffdetail extends Component {
     render() {
         //create {staff}
         const { staff } = this.props;
-        return (
+        return (            
             <div className="container">
                 <div className="row">
                     {/*Create Breadcrumb*/}
@@ -72,7 +72,7 @@ class Staffdetail extends Component {
                                     <ul>
                                         <li><CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText></li>
                                         <li><CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText></li>
-                                        <li><CardText>Phòng ban: {staff.department.name}</CardText></li>
+                                        <li><CardText>Phòng ban: {staff.departmentId.name}</CardText></li>
                                         <li><CardText>Số ngày nghỉ: {staff.annualLeave}</CardText></li>
                                         <li><CardText>Số ngày đi làm thêm: {staff.overTime}</CardText></li>
                                     </ul>

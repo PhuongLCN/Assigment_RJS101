@@ -30,20 +30,20 @@ class Main extends Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
+    componentDidMount() { //setStatte
         this.props.fetchStaffs();
         this.props.fetchDepartment();
         this.props.fetchSalary();
     }
     render() {
-        /* const StaffWithId = ({ match }) => {
+        const StaffWithId = ({ match }) => {
             return (
                 //Show Staffdetail from staff.id filter
                 <Staffdetail staff={this.props.staffs.staffs.filter((staff) => staff.id === parseInt(match.params.filterID, 10))[0]}
                     isLoading={this.props.staffs.isLoading}
                     errMess={this.props.staffs.errMess} />);
 
-        }; */
+        };
         const DeptsWithId = ({ match }) => {
             return (
                 //Show Staffdetail from staff.id filter
@@ -59,7 +59,7 @@ class Main extends Component {
                             {/*Link to Stafflist*/}
                             <Route exact path='/stafflist' component={() => <Stafflist staffs={this.props.staffs} postNewStaff={this.props.postNewStaff} />} />
                             {/*Link to Staffdetail when click Staffid*/}
-                            {/* <Route path='/stafflist/:filterID' component={StaffWithId} /> */}
+                            <Route path='/stafflist/:filterID' component={StaffWithId} />
                             {/*Link to Deparment*/}
                             <Route exact path='/dept' component={() => <Deparment depts={this.props.depts} />} />
                             <Route path='/dept/:filterID' component={DeptsWithId} />

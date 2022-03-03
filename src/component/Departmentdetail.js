@@ -22,14 +22,13 @@ class DepartmentDetail extends Component {
                         {/* show staff image*/}
                         <CardImg width="100%" src={staff.image} alt={staff.name} />
                         {/* show staff name */}
+                        <Link to={`/stafflist/${staff.id}`}>
                         <CardTitle tag="h5" style={{ textAlign: "center" }}>{staff.name}</CardTitle>
+                        </Link>                        
                     </Card>
                 </div>
             );
         });
-
-        //create errors from validate function
-        //const errors = this.validate(this.state.name, this.state.doB, this.state.startDate);
         return (
             <div className='container'>
                 <div className="row">
@@ -48,5 +47,4 @@ class DepartmentDetail extends Component {
         );
     }
 }
-
 export default DepartmentDetail;
