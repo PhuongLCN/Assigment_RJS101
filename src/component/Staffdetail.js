@@ -94,6 +94,7 @@ class Staffdetail extends Component {
                                     </Card>
                                 </FadeTransform>
                                 <Button onClick={() => this.handleDelete(staff.id)} color="info" style={{ margin: "5px" }}>Xóa</Button>
+                                
                             </div>
                             <div className='col-12 col-sm-8 col-md-9'>
                                 {/*Show staff detail*/}
