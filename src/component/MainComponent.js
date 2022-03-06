@@ -9,7 +9,7 @@ import Deparment from './Department';
 import Salary from './Salary';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { fetchDepartment, fetchStaffs, postNewStaff, fetchSalary } from '../redux/ActionCreators';
+import { fetchDepartment, fetchStaffs, postNewStaff, fetchSalary, deleteStaff } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
     postNewStaff: (name, doB, salaryScale, startDate,
         department, annualLeave, overTime, image) => dispatch(postNewStaff(name, doB, salaryScale,
             startDate, department, annualLeave, overTime, image)),
+    deleteStaff: (id) => dispatch(deleteStaff(id)),
     fetchStaffs: () => { dispatch(fetchStaffs()) },
     fetchDepartment: () => { dispatch(fetchDepartment()) },
     fetchSalary: () => { dispatch(fetchSalary()) }
@@ -40,6 +41,7 @@ class Main extends Component {
             return (
                 //Show Staffdetail from staff.id filter
                 <Staffdetail staff={this.props.staffs.staffs.filter((staff) => staff.id === parseInt(match.params.filterID, 10))[0]}
+                    deleteStaff={this.props.deleteStaff}
                     isLoading={this.props.staffs.isLoading}
                     errMess={this.props.staffs.errMess} />);
 

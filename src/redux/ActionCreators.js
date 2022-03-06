@@ -62,6 +62,32 @@ export const postNewStaff = (name, doB, salaryScale, startDate, departmentId,
             .then(response => response.json())
             .then(response => dispatch(addStaff(response)));
     };
+    export const deleteStaff = (id) => (dispatch)=>{
+        const staffId = {
+            id: id
+        }
+        return fetch(baseUrl + 'staffs/'+id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin"
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+                error => {
+                    throw error;
+                 })
+            .then(response => response.json())
+            .then(response => dispatch(fetchStaffs()));
+    }
 export const addDeparment = (depts) => ({
     type: ActionTypes.ADD_DEPARTMENT,
     payload: depts
